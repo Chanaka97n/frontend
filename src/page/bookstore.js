@@ -7,7 +7,7 @@ export default function Bookstore() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("YOUR_API_ENDPOINT");
+        const response = await axios.get("http://localhost:5555/books");
         setBooks(response.data.data);
       } catch (error) {
         console.error("Error fetching data: ", error);
@@ -19,10 +19,12 @@ export default function Bookstore() {
 
   const deleteBook = async (id) => {
     try {
-      await axios.delete(`YOUR_API_ENDPOINT/${id}`);
+      await axios.delete(`http://localhost:5555/books/${id}`);
       setBooks(books.filter((book) => book._id !== id));
+      toast.success("delete book");
     } catch (error) {
       console.error("Error deleting book: ", error);
+      toast.error("request faild");
     }
   };
 

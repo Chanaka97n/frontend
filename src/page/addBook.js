@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function AddBook() {
   const [formData, setFormData] = useState({
@@ -15,11 +16,16 @@ export default function AddBook() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("YOUR_API_ENDPOINT", formData);
+      const response = await axios.post(
+        "http://localhost:5555/books",
+        formData
+      );
       console.log("Book added:", response.data);
+      toast.success("add book details");
       // Reset form or provide further user feedback
     } catch (error) {
       console.error("Error adding book:", error);
+      toast.error("Request faild");
     }
   };
 
